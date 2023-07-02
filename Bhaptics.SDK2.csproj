@@ -41,14 +41,14 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\Plugins\BhapticsLibrary.cs" />
-     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\UI\BhapticsDeviceUI.cs" />
+     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\BhapticsSDK2.cs" />
+     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\Plugins\x86_64\bhaptics_library.cs" />
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\UI\BhapticsUI.cs" />
+     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\Plugins\BhapticsLibrary.cs" />
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\BhapticsSettings.cs" />
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\Plugins\AndroidHaptic.cs" />
-     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\Plugins\x86_64\bhaptics_library.cs" />
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\BhapticsHelpers.cs" />
-     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\BhapticsSDK2.cs" />
+     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Core\UI\BhapticsDeviceUI.cs" />
      <Folder Include="Assets\Bhaptics\SDK2\Scripts\Core" />
      <None Include="Assets\Bhaptics\SDK2\Scripts\Core\Bhaptics.SDK2.asmdef" />
      <Folder Include="Assets\Bhaptics\SDK2\Scripts\Core\Plugins\x86_64" />

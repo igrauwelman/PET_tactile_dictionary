@@ -42,8 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Editor\BhapticsSettingWindowAssets.cs" />
-     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Editor\BhapticsEventGenerator.cs" />
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Editor\BhapticsSettingsEditor.cs" />
+     <Compile Include="Assets\Bhaptics\SDK2\Scripts\Editor\BhapticsEventGenerator.cs" />
      <Compile Include="Assets\Bhaptics\SDK2\Scripts\Editor\BhapticsSettingWindow.cs" />
      <Folder Include="Assets\Bhaptics\SDK2\Scripts\Editor" />
      <None Include="Assets\Bhaptics\SDK2\Scripts\Editor\Bhaptics.SDK2.Editor.asmdef" />
