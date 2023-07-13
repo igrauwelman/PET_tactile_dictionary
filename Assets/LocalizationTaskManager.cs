@@ -38,7 +38,7 @@ public class LocalizationTaskManager : MonoBehaviour
         vibrationLocations.AddRange(vibrationLocations);
         
         ShuffleList();
-        Debug.Log("Randomized List: " + vibrationLocations.Count + "; " + string.Join(", ", vibrationLocations));
+        Debug.Log("Randomized List: " + string.Join(", ", vibrationLocations));
         correctResponses = new List<string>(vibrationLocations);
         
         UpdateUI("start");
@@ -112,7 +112,6 @@ public class LocalizationTaskManager : MonoBehaviour
 
     private void NextPattern()
     {
-        Debug.Log(vibrationLocations[0]);
         Motors.Instance.SetMotors(vibrationLocations[0]);
         BhapticsLibrary.PlayMotors((int) Bhaptics.SDK2.PositionType.Vest, Motors.Instance.motors, 1000);
     }

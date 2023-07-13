@@ -18,6 +18,7 @@ public class Motors : MonoBehaviour
     public readonly Dictionary<string, int[]> PatternMotorsIdentifier = new ();
 
     public float Intensity { get; set; } = 1f;
+    public int Rows { get; private set; } = 1;
 
     public static Motors Instance { get; private set; }
 
@@ -77,7 +78,28 @@ public class Motors : MonoBehaviour
     public void SetIntensity(float dist)
     {
         float x = Mathf.Clamp(dist, 0.5f, 4f);
-        Intensity = ((50f - 100f) * (x - 0.0f) / (4.0f - 0.0f)) + 100f;
+        Intensity = ((50f - 100f) * (x - 0.5f) / (4.0f - 0.5f)) + 100f;
+    }
+    
+    // map distance (0-4) to number of rows (1,3,5)
+    public void SetRows(float dist)
+    {
+        float x = Mathf.Clamp(dist, 0.5f, 4f);
+        float rows = ((0f - 5f) * (x - 0.5f) / (4.0f - 0.5f)) + 5f;
+        
+        // clamp value to 1, 3 or 5
+        switch (rows)
+        {
+            case >= 3f:
+                Rows = 5;
+                break;
+            case >=2f:
+                Rows = 3;
+                break;
+            case < 2f:
+                Rows = 1;
+                break;
+        }
     }
     
     public void SetMotors(string pattern)

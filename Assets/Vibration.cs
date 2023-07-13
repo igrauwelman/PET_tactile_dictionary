@@ -71,7 +71,7 @@ public class Vibration : MonoBehaviour
         distance = Vector3.Distance(new Vector3(player.transform.position.x, 0f, player.transform.position.z), 
             new Vector3(obstacle.transform.position.x, 0f, obstacle.transform.position.z));
 
-        switch (distance)
+        /*switch (distance)
         {
             case > 3.25f:
                 return 1;
@@ -81,7 +81,11 @@ public class Vibration : MonoBehaviour
                 return 5;
             default:
                 return 1;
-        }
+        } */
+        
+        Motors.Instance.SetRows(distance);
+
+        return Motors.Instance.Rows;
     }
 
 }
