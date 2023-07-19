@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54d6bae3b5b89f49bc2db0b2a07f9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  occurrencePerPattern: 4
   buttons:
   - {fileID: 1672310641}
   - {fileID: 2123678546}
@@ -297,6 +298,7 @@ MonoBehaviour:
   - {fileID: 1922728705}
   - {fileID: 53091523}
   resultText: {fileID: 1074372460}
+  startButton: {fileID: 686008103}
 --- !u!4 &107199851
 Transform:
   m_ObjectHideFlags: 0

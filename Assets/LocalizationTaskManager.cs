@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Bhaptics.SDK2;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,37 +14,40 @@ public class LocalizationTaskManager : MonoBehaviour
     private List<string> vibrationLocations = new();
     private List<string> correctResponses = new();
     private List<string> participantResponses = new();
+    [SerializeField] private int occurrencePerPattern = 1;
 
     [SerializeField] private List<GameObject> buttons;
     [SerializeField] private TMP_Text resultText;
     private double correctnessRate = 0;
+    [SerializeField] private GameObject startButton;
 
-    private void Start()
-    { 
+    private void PrepareTask()
+    {
         participantResponses.Clear();
         
         patternMotorsDict = Motors.Instance.PatternMotorsIdentifier;
         Motors.Instance.Intensity = 40f;
-        
-        vibrationLocations.Add(BhapticsEvent.LEFT_1);
-        vibrationLocations.Add(BhapticsEvent.LEFT_3);
-        vibrationLocations.Add(BhapticsEvent.LEFT_5);
-        vibrationLocations.Add(BhapticsEvent.MIDDLE_1);
-        vibrationLocations.Add(BhapticsEvent.MIDDLE_3);
-        vibrationLocations.Add(BhapticsEvent.MIDDLE_5);
-        vibrationLocations.Add(BhapticsEvent.RIGHT_1);
-        vibrationLocations.Add(BhapticsEvent.RIGHT_3);
-        vibrationLocations.Add(BhapticsEvent.RIGHT_5);
-        vibrationLocations.AddRange(vibrationLocations);
-        vibrationLocations.AddRange(vibrationLocations);
+
+        for (int i = 0; i < occurrencePerPattern; i++)
+        {
+            vibrationLocations.Add(BhapticsEvent.LEFT_1);
+            vibrationLocations.Add(BhapticsEvent.LEFT_3);
+            vibrationLocations.Add(BhapticsEvent.LEFT_5);
+            vibrationLocations.Add(BhapticsEvent.MIDDLE_1);
+            vibrationLocations.Add(BhapticsEvent.MIDDLE_3);
+            vibrationLocations.Add(BhapticsEvent.MIDDLE_5);
+            vibrationLocations.Add(BhapticsEvent.RIGHT_1);
+            vibrationLocations.Add(BhapticsEvent.RIGHT_3);
+            vibrationLocations.Add(BhapticsEvent.RIGHT_5);
+        }
         
         ShuffleList();
-        Debug.Log("Randomized List: " + string.Join(", ", vibrationLocations));
+        Debug.Log("Randomized List (" + vibrationLocations.Count + " items): " + string.Join(", ", vibrationLocations));
         correctResponses = new List<string>(vibrationLocations);
         
         UpdateUI("start");
     }
-
+    
     private void ShuffleList()
     {
         for (int i = 0; i < vibrationLocations.Count; i++)
@@ -55,11 +59,14 @@ public class LocalizationTaskManager : MonoBehaviour
         }
     }
 
+    // public function to use for the Start Button
     public void StartTask()
     {
+        PrepareTask();
         NextPattern();
     }
 
+    // called upon Button click
     public void AddParticipantResponse(Button button)
     {
         Motors.Instance.ClearMotors();
@@ -96,8 +103,10 @@ public class LocalizationTaskManager : MonoBehaviour
                 break;
         }
         
+        // remove the pattern that was just played
         vibrationLocations.RemoveAt(0);
         
+        // if no pattern is left, end the task
         if (vibrationLocations.Count == 0)
         {
             
@@ -109,6 +118,7 @@ public class LocalizationTaskManager : MonoBehaviour
             NextPattern();
         }
     }
+    
 
     private void NextPattern()
     {
@@ -129,6 +139,8 @@ public class LocalizationTaskManager : MonoBehaviour
                 resultText.gameObject.SetActive(true);
                 resultText.text =
                     "Localization task finished. The correctness rate is " + correctnessRate + "%!";
+                startButton.gameObject.SetActive(true);
+                startButton.GetComponentInChildren<TMP_Text>().text = "Start again";
                 break;
             }
             case "start":
@@ -137,6 +149,7 @@ public class LocalizationTaskManager : MonoBehaviour
                 {
                     button.SetActive(true);
                 }
+                startButton.GetComponentInChildren<TMP_Text>().text = "Start";
                 resultText.gameObject.SetActive(false);
                 break;
             }
